@@ -62,6 +62,7 @@ To run these commands: `$ docker exec -ti server sh`
 
 ```bash
 $ python manage.py migrate --settings server.settings
+$ exit
 ```
 
 ## 4. Done
