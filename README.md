@@ -64,9 +64,5 @@ To run these commands: `$ docker exec -ti server sh`
 $ python manage.py migrate --settings server.settings
 ```
 
-## 4. Restart nginx container
-
-`$ docker-compose restart nginx`
-
-## 5. Done
+## 4. Done
 
