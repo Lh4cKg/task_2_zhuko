@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  server:
+    image: server:latest
+    container_name: server
+    restart: always
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - server_data:/src/server
+    networks:
+      - shared_net
+    depends_on:
+      - pgdb
+
+  client:
+    image: client:latest
+    container_name: client
+    restart: always
+    expose:
+      - 80
+    ports:
+      - "80:80"
+    networks:
+      - shared_net
+    depends_on:
+      - server
+
+  pgdb:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: gocha
+      POSTGRES_PASSWORD: qwert5432
+      POSTGRES_DB: server_db
+    networks:
+      - shared_net
+    volumes:
+      - server_db:/var/lib/postgresql/data
+
+
+networks:
+  shared_net:
+    driver: overlay
+
+
+volumes:
+    server_data:
+        driver: local
+    server_db:
+        driver: local
